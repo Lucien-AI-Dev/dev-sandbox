@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Skip link for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <!-- Header -->
     <header class="header">
         <nav class="nav">
@@ -19,7 +21,7 @@
     </header>
 
     <!-- Hero Section -->
-    <main>
+    <main id="main-content">
         <section class="hero">
             <div class="container">
                 <div class="hero-content">
@@ -31,7 +33,7 @@
                         <form class="waitlist-form" action="#" method="POST">
                             <div class="form-group">
                                 <label for="email" class="sr-only">Email address</label>
-                                <input 
+                                <input aria-describedby="email-help" aria-required="true" 
                                     type="email" 
                                     id="email" 
                                     name="email" 
@@ -142,3 +144,49 @@
     </footer>
 </body>
 </html>
+
+<!-- Additional accessibility and UX improvements -->
+<script>
+// Basic form validation and UX enhancements (inline for simplicity)
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.querySelector('.waitlist-form');
+    const emailInput = document.querySelector('#email');
+    const submitBtn = document.querySelector('.submit-btn');
+    
+    // Add form validation feedback
+    emailInput.addEventListener('input', function() {
+        if (this.validity.valid) {
+            this.setAttribute('aria-invalid', 'false');
+        } else {
+            this.setAttribute('aria-invalid', 'true');
+        }
+    });
+    
+    // Prevent form submission if email is invalid
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        if (emailInput.validity.valid) {
+            // Add loading state
+            submitBtn.classList.add('loading');
+            submitBtn.disabled = true;
+            
+            // Simulate form submission (replace with actual backend call)
+            setTimeout(function() {
+                submitBtn.classList.remove('loading');
+                submitBtn.disabled = false;
+                
+                // Show success message
+                const successMsg = document.createElement('div');
+                successMsg.className = 'form-success';
+                successMsg.textContent = 'Thank you! You\'ve been added to our waitlist.';
+                successMsg.setAttribute('role', 'status');
+                successMsg.setAttribute('aria-live', 'polite');
+                
+                form.appendChild(successMsg);
+                emailInput.value = '';
+            }, 2000);
+        }
+    });
+});
+</script>
