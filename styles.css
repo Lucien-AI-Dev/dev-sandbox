@@ -576,3 +576,199 @@ body {
         transition-duration: 0.01ms !important;
     }
 }
+
+/* Additional Visual Enhancements */
+
+/* Form Validation States */
+.email-input:valid {
+    border-color: var(--accent-color);
+    background: rgba(16, 185, 129, 0.1);
+}
+
+.email-input:invalid:not(:placeholder-shown) {
+    border-color: #ef4444;
+    background: rgba(239, 68, 68, 0.1);
+}
+
+.email-input:invalid:not(:placeholder-shown) + .submit-btn {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Loading state for form submission */
+.submit-btn.loading {
+    position: relative;
+    color: transparent;
+}
+
+.submit-btn.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid transparent;
+    border-top: 2px solid white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Success state */
+.form-success {
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid var(--accent-color);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    margin-top: var(--spacing-md);
+    text-align: center;
+    color: var(--accent-color);
+    font-weight: 600;
+}
+
+/* Enhanced hover effects for cards */
+.feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+    opacity: 0;
+    border-radius: var(--radius-xl);
+    transition: opacity 0.3s ease;
+    z-index: -1;
+}
+
+.feature-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.feature-card:hover::before {
+    opacity: 0.05;
+}
+
+.feature-card:hover .feature-icon {
+    transform: scale(1.1);
+    transition: transform 0.3s ease;
+}
+
+/* Gradient text effect for hero title */
+.hero-title {
+    background: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.8) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Pulse animation for CTA button */
+.submit-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: inherit;
+    border-radius: inherit;
+    opacity: 0;
+    transform: scale(1);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 0.3;
+    }
+    100% {
+        transform: scale(1.1);
+        opacity: 0;
+    }
+}
+
+/* Floating animation for placeholder graphic */
+.placeholder-graphic {
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Stagger animation for feature cards */
+.feature-card:nth-child(1) {
+    animation: fadeInUp 0.8s ease-out 0.1s both;
+}
+
+.feature-card:nth-child(2) {
+    animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+.feature-card:nth-child(3) {
+    animation: fadeInUp 0.8s ease-out 0.3s both;
+}
+
+/* Enhanced focus states */
+.feature-card:focus-within {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-large);
+    border-color: var(--primary-color);
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--background-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-dark);
+}
+
+/* Print styles */
+@media print {
+    .header,
+    .footer {
+        display: none;
+    }
+    
+    .hero {
+        background: none !important;
+        color: black !important;
+    }
+    
+    .waitlist-form-container {
+        display: none;
+    }
+}
